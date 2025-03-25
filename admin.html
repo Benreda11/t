@@ -1,0 +1,243 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="admin-dashboard">
+    <div class="admin-header">
+        <h2>Admin Dashboard</h2>
+        <p>Manage HTML elements, tables, and forms examples</p>
+    </div>
+    
+    <div class="admin-tabs">
+        <button class="tab-btn active" data-tab="html-tab">HTML Elements</button>
+        <button class="tab-btn" data-tab="tables-tab">Tables</button>
+        <button class="tab-btn" data-tab="forms-tab">Forms</button>
+    </div>
+    
+    <div class="admin-content">
+        <!-- HTML Elements Tab -->
+        <div class="tab-content active" id="html-tab">
+            <div class="admin-actions">
+                <button id="add-html-btn" class="btn btn-primary"><i class="fas fa-plus"></i> Add New Element</button>
+            </div>
+            
+            <div class="admin-table-container">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="html-elements-table">
+                        {% for example in html_examples %}
+                        <tr data-id="{{ example.id }}">
+                            <td>{{ example.title }}</td>
+                            <td>{{ example.element_type }}</td>
+                            <td>{{ example.description }}</td>
+                            <td class="actions">
+                                <button class="btn-icon edit-html-btn" data-id="{{ example.id }}"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon delete-html-btn" data-id="{{ example.id }}"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Tables Tab -->
+        <div class="tab-content" id="tables-tab">
+            <div class="admin-actions">
+                <button id="add-table-btn" class="btn btn-primary"><i class="fas fa-plus"></i> Add New Table</button>
+            </div>
+            
+            <div class="admin-table-container">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-examples-table">
+                        {% for example in table_examples %}
+                        <tr data-id="{{ example.id }}">
+                            <td>{{ example.title }}</td>
+                            <td>{{ example.table_type }}</td>
+                            <td>{{ example.description }}</td>
+                            <td class="actions">
+                                <button class="btn-icon edit-table-btn" data-id="{{ example.id }}"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon delete-table-btn" data-id="{{ example.id }}"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Forms Tab -->
+        <div class="tab-content" id="forms-tab">
+            <div class="admin-actions">
+                <button id="add-form-btn" class="btn btn-primary"><i class="fas fa-plus"></i> Add New Form</button>
+            </div>
+            
+            <div class="admin-table-container">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="form-examples-table">
+                        {% for example in form_examples %}
+                        <tr data-id="{{ example.id }}">
+                            <td>{{ example.title }}</td>
+                            <td>{{ example.form_type }}</td>
+                            <td>{{ example.description }}</td>
+                            <td class="actions">
+                                <button class="btn-icon edit-form-btn" data-id="{{ example.id }}"><i class="fas fa-edit"></i></button>
+                                <button class="btn-icon delete-form-btn" data-id="{{ example.id }}"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- HTML Element Modal Form -->
+<div id="html-modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="html-modal-title">Add HTML Element</h3>
+            <span class="close-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form id="html-form">
+                <input type="hidden" id="html-id">
+                <div class="form-group">
+                    <label for="html-title">Title</label>
+                    <input type="text" id="html-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="html-element-type">Element Type</label>
+                    <input type="text" id="html-element-type" required>
+                </div>
+                <div class="form-group">
+                    <label for="html-description">Description</label>
+                    <textarea id="html-description" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="html-code">HTML Code</label>
+                    <textarea id="html-code" rows="6" required></textarea>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button id="save-html-btn" class="btn btn-primary">Save</button>
+            <button class="btn btn-secondary close-btn">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<!-- Table Modal Form -->
+<div id="table-modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="table-modal-title">Add Table Example</h3>
+            <span class="close-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form id="table-form">
+                <input type="hidden" id="table-id">
+                <div class="form-group">
+                    <label for="table-title">Title</label>
+                    <input type="text" id="table-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="table-type">Table Type</label>
+                    <input type="text" id="table-type" required>
+                </div>
+                <div class="form-group">
+                    <label for="table-description">Description</label>
+                    <textarea id="table-description" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="table-code">HTML Code</label>
+                    <textarea id="table-code" rows="6" required></textarea>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button id="save-table-btn" class="btn btn-primary">Save</button>
+            <button class="btn btn-secondary close-btn">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<!-- Form Modal Form -->
+<div id="form-modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="form-modal-title">Add Form Example</h3>
+            <span class="close-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form id="form-example-form">
+                <input type="hidden" id="form-id">
+                <div class="form-group">
+                    <label for="form-title">Title</label>
+                    <input type="text" id="form-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="form-type">Form Type</label>
+                    <input type="text" id="form-type" required>
+                </div>
+                <div class="form-group">
+                    <label for="form-description">Description</label>
+                    <textarea id="form-description" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="form-code">HTML Code</label>
+                    <textarea id="form-code" rows="6" required></textarea>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button id="save-form-btn" class="btn btn-primary">Save</button>
+            <button class="btn btn-secondary close-btn">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<!-- Confirmation Dialog -->
+<div id="confirm-dialog" class="modal">
+    <div class="modal-content confirm-content">
+        <div class="modal-header">
+            <h3>Confirm Deletion</h3>
+            <span class="close-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <p>Are you sure you want to delete this item? This action cannot be undone.</p>
+        </div>
+        <div class="modal-footer">
+            <button id="confirm-delete-btn" class="btn btn-danger">Delete</button>
+            <button class="btn btn-secondary close-btn">Cancel</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+{% endblock %}

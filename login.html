@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="login-section">
+    <div class="login-container">
+        <div class="login-header">
+            <h2>Admin Login</h2>
+            <p>Enter your credentials to access admin features</p>
+        </div>
+        
+        <form method="POST" action="{{ url_for('login') }}" class="login-form">
+            {{ form.hidden_tag() if form }}
+            <div class="form-group">
+                <label for="username">Username</label>
+                <div class="input-group">
+                    <span class="input-icon"><i class="fas fa-user"></i></span>
+                    <input type="text" id="username" name="username" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="input-group">
+                    <span class="input-icon"><i class="fas fa-lock"></i></span>
+                    <input type="password" id="password" name="password" required>
+                </div>
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </div>
+        </form>
+        
+        <div class="login-footer">
+            <p>Note: This login is for administrators only.</p>
+            <p>Regular users can view content without logging in.</p>
+        </div>
+    </div>
+    
+    <div class="login-decoration">
+        <div class="code-background">
+            <div class="code-lines">
+                <div class="code-line"><span class="code-comment">// Admin authentication</span></div>
+                <div class="code-line"><span class="code-keyword">function</span> <span class="code-function">login</span>() {</div>
+                <div class="code-line">  <span class="code-keyword">const</span> username = <span class="code-string">"admin"</span>;</div>
+                <div class="code-line">  <span class="code-keyword">const</span> password = <span class="code-string">"********"</span>;</div>
+                <div class="code-line">  </div>
+                <div class="code-line">  <span class="code-keyword">if</span> (isValidCredentials(username, password)) {</div>
+                <div class="code-line">    <span class="code-function">redirectTo</span>(<span class="code-string">"admin-panel"</span>);</div>
+                <div class="code-line">  } <span class="code-keyword">else</span> {</div>
+                <div class="code-line">    <span class="code-function">showError</span>(<span class="code-string">"Invalid credentials"</span>);</div>
+                <div class="code-line">  }</div>
+                <div class="code-line">}</div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

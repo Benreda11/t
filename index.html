@@ -1,0 +1,200 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="hero-section">
+    <div class="hero-content">
+        <h1 class="animate-text">Learn HTML, CSS & JS<span class="highlight"> Interactively</span></h1>
+        <p class="hero-description">Explore HTML structural elements, tables, and forms with our dynamic educational site</p>
+        <div class="hero-actions">
+            <a href="#html-elements" class="btn btn-primary">Get Started</a>
+            <a href="#forms" class="btn btn-secondary">Explore Forms</a>
+        </div>
+    </div>
+    <div class="hero-visual">
+        <div class="code-container">
+            <div class="code-header">
+                <div class="code-dot red"></div>
+                <div class="code-dot yellow"></div>
+                <div class="code-dot green"></div>
+                <span>index.html</span>
+            </div>
+            <div class="code-content">
+                <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Learning HTML&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Hello, World!&lt;/h1&gt;
+    &lt;p&gt;Welcome to HTML learning.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="html-elements" class="elements-section">
+    <div class="section-header">
+        <h2>HTML Structural Elements</h2>
+        <p>Learn how to structure your web pages using various HTML elements</p>
+    </div>
+    
+    <div class="elements-container">
+        <div class="filter-tabs">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="Semantic">Semantic</button>
+            <button class="filter-btn" data-filter="Container">Containers</button>
+        </div>
+        
+        <div class="elements-grid">
+            {% for example in html_examples %}
+            <div class="element-card" data-type="{{ example.element_type }}">
+                <div class="card-header">
+                    <h3>{{ example.title }}</h3>
+                    <span class="element-type">{{ example.element_type }}</span>
+                </div>
+                <div class="card-body">
+                    <p>{{ example.description }}</p>
+                    <div class="code-preview">
+                        <pre><code class="html">{{ example.html_code }}</code></pre>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-small try-btn" data-code="{{ example.html_code }}">Try it</button>
+                    <button class="btn btn-small copy-btn" data-code="{{ example.html_code }}">Copy</button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section id="tables" class="tables-section">
+    <div class="section-header">
+        <h2>HTML Tables</h2>
+        <p>Explore different ways to create and style tables in HTML</p>
+    </div>
+    
+    <div class="tables-container">
+        <div class="filter-tabs">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="Basic">Basic</button>
+            <button class="filter-btn" data-filter="With Caption">With Caption</button>
+            <button class="filter-btn" data-filter="With Colspan">With Colspan</button>
+            <button class="filter-btn" data-filter="With Rowspan">With Rowspan</button>
+        </div>
+        
+        <div class="tables-grid">
+            {% for example in table_examples %}
+            <div class="table-card" data-type="{{ example.table_type }}">
+                <div class="card-header">
+                    <h3>{{ example.title }}</h3>
+                    <span class="table-type">{{ example.table_type }}</span>
+                </div>
+                <div class="card-body">
+                    <p>{{ example.description }}</p>
+                    <div class="code-preview">
+                        <pre><code class="html">{{ example.html_code }}</code></pre>
+                    </div>
+                    <div class="table-preview">
+                        {{ example.html_code|safe }}
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-small try-btn" data-code="{{ example.html_code }}">Try it</button>
+                    <button class="btn btn-small copy-btn" data-code="{{ example.html_code }}">Copy</button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section id="forms" class="forms-section">
+    <div class="section-header">
+        <h2>HTML Forms</h2>
+        <p>Learn to create different types of forms with various input elements</p>
+    </div>
+    
+    <div class="forms-container">
+        <div class="filter-tabs">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="Basic">Basic</button>
+            <button class="filter-btn" data-filter="Authentication">Authentication</button>
+            <button class="filter-btn" data-filter="With Checkboxes">With Checkboxes</button>
+            <button class="filter-btn" data-filter="With Radio Buttons">With Radio Buttons</button>
+            <button class="filter-btn" data-filter="With Select Dropdown">With Dropdowns</button>
+            <button class="filter-btn" data-filter="With Textarea">With Textarea</button>
+        </div>
+        
+        <div class="forms-grid">
+            {% for example in form_examples %}
+            <div class="form-card" data-type="{{ example.form_type }}">
+                <div class="card-header">
+                    <h3>{{ example.title }}</h3>
+                    <span class="form-type">{{ example.form_type }}</span>
+                </div>
+                <div class="card-body">
+                    <p>{{ example.description }}</p>
+                    <div class="code-preview">
+                        <pre><code class="html">{{ example.html_code }}</code></pre>
+                    </div>
+                    <div class="form-preview">
+                        {{ example.html_code|safe }}
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-small try-btn" data-code="{{ example.html_code }}">Try it</button>
+                    <button class="btn btn-small copy-btn" data-code="{{ example.html_code }}">Copy</button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<div id="code-modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Try It Live</h3>
+            <span class="close-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <div class="editor-container">
+                <div class="editor-section">
+                    <h4>HTML Code</h4>
+                    <textarea id="html-editor"></textarea>
+                </div>
+                <div class="preview-section">
+                    <h4>Preview</h4>
+                    <div id="preview-container"></div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button id="run-code" class="btn btn-primary">Run</button>
+            <button id="reset-code" class="btn btn-secondary">Reset</button>
+        </div>
+    </div>
+</div>
+
+<div class="copy-notification" id="copy-notification">
+    Copied to clipboard!
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // For disabling form submissions in the example forms
+    document.addEventListener('DOMContentLoaded', function() {
+        const formPreviews = document.querySelectorAll('.form-preview form');
+        formPreviews.forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('This is just a demo form. Submission is disabled.');
+            });
+        });
+    });
+</script>
+{% endblock %}
